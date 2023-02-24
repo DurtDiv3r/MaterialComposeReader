@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "512020841891",
+    "project_id": "materialcomposereader",
+    "storage_bucket": "materialcomposereader.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512020841891:android:39c42ab0bd96a9e08b4616",
+        "android_client_info": {
+          "package_name": "com.example.materialcomposereader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512020841891-mvf9c13b7bf26b87ehm4k4is3ef1cqp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArn1GD_MITuhUm02OOkiQHpfKfEpdW2XI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512020841891-mvf9c13b7bf26b87ehm4k4is3ef1cqp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
