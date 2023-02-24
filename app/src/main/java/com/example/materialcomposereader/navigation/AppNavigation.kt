@@ -9,8 +9,8 @@ import com.example.materialcomposereader.screens.SplashScreen
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = AppScreens.SplashScreen.name) {
-        composable(AppScreens.SplashScreen.name) {
+    NavHost(navController = navController, startDestination = AppScreen.SplashScreen.name) {
+        composable(AppScreen.SplashScreen.name) {
             SplashScreen(navController = navController)
         }
     }
