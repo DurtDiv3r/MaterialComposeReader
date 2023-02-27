@@ -17,12 +17,12 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.materialcomposereader.navigation.AppScreen
-import com.example.materialcomposereader.util.Constants.ANIMATION_DURATION
-import com.example.materialcomposereader.util.Constants.ANIMATION_SCALE
-import com.example.materialcomposereader.util.Constants.ANIMATION_TENSION
-import com.example.materialcomposereader.util.Constants.ANIMATION_URL
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
+
+private const val ANIMATION_SCALE = 0.9f
+private const val ANIMATION_TENSION = 8f
+private const val ANIMATION_DURATION = 1500
+private const val ANIMATION_URL = "https://assets2.lottiefiles.com/private_files/lf30_FJSIAJ.json"
 
 @Composable
 fun SplashScreen(navController: NavController) {
@@ -38,11 +38,7 @@ fun SplashScreen(navController: NavController) {
         )
         delay(3000)
 
-        if (FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty()) {
-            navController.navigate(AppScreen.LoginScreen.name)
-        } else {
-            // Navigate to HomeScreen when login complete
-        }
+        navController.navigate(AppScreen.LoginScreen.name)
     }
 
     Surface(
