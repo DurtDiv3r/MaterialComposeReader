@@ -24,14 +24,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.materialcomposereader.R
+import com.example.materialcomposereader.ext.fieldModifier
 
-@Preview
 @Composable
 fun UsernameInputField(
-    value: String = "UsernameInputField",
-    onNewValue: (String) -> Unit = {},
+    value: String,
+    onNewValue: (String) -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
+    enabled: Boolean,
 ) {
     OutlinedTextField(
         value = value,
@@ -52,13 +52,12 @@ fun UsernameInputField(
     )
 }
 
-@Preview
 @Composable
 fun EmailInputField(
-    value: String = "EmailInputField",
-    onNewValue: (String) -> Unit = {},
+    value: String,
+    onNewValue: (String) -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
+    enabled: Boolean,
 ) {
     OutlinedTextField(
         value = value,
@@ -79,15 +78,15 @@ fun EmailInputField(
     )
 }
 
-@Preview
 @Composable
 fun PasswordInputField(
-    value: String = "PasswordInputField",
-    onNewValue: (String) -> Unit = {},
+    value: String,
+    onNewValue: (String) -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
+    enabled: Boolean,
+    fieldVisibility: Boolean = false,
 ) {
-    val passwordVisibility = rememberSaveable { mutableStateOf(false) }
+    val passwordVisibility = rememberSaveable { mutableStateOf(fieldVisibility) }
     val visualTransformation = if (passwordVisibility.value) {
         VisualTransformation.None
     } else {
@@ -157,5 +156,95 @@ fun SubmitButton(
                 text = label,
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun UsernameDefaultPreview() {
+    UsernameInputField(
+        value = "",
+        onNewValue = { },
+        enabled = true,
+        modifier = Modifier.fieldModifier(),
+    )
+}
+
+@Preview
+@Composable
+private fun UsernameFilledPreview() {
+    UsernameInputField(
+        value = "Us3rName",
+        onNewValue = { },
+        enabled = true,
+        modifier = Modifier.fieldModifier(),
+    )
+}
+
+@Preview
+@Composable
+private fun EmailDefaultPreview() {
+    EmailInputField(
+        value = "",
+        onNewValue = { },
+        enabled = true,
+        modifier = Modifier.fieldModifier(),
+    )
+}
+
+@Preview
+@Composable
+private fun EmailFilledPreview() {
+    EmailInputField(
+        value = "bob@tester.com",
+        onNewValue = { },
+        enabled = true,
+        modifier = Modifier.fieldModifier(),
+    )
+}
+
+@Preview
+@Composable
+private fun PasswordHiddenPreview() {
+    PasswordInputField(
+        value = "password",
+        onNewValue = { },
+        enabled = true,
+        fieldVisibility = false,
+        modifier = Modifier.fieldModifier(),
+    )
+}
+
+@Preview
+@Composable
+private fun PasswordVisiblePreview() {
+    PasswordInputField(
+        value = "password",
+        onNewValue = { },
+        enabled = true,
+        fieldVisibility = true,
+        modifier = Modifier.fieldModifier(),
+    )
+}
+
+@Preview
+@Composable
+private fun SubmitButtonDefaultPreview() {
+    SubmitButton(
+        label = "Submit",
+        isLoading = false,
+        valid = false,
+    ) {
+    }
+}
+
+@Preview
+@Composable
+private fun SubmitButtonValidPreview() {
+    SubmitButton(
+        label = "Submit",
+        isLoading = false,
+        valid = true,
+    ) {
     }
 }
