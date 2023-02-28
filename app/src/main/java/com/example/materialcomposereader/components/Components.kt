@@ -20,14 +20,16 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.materialcomposereader.R
 
+@Preview
 @Composable
 fun UsernameInputField(
-    value: String = "",
-    onNewValue: (String) -> Unit,
+    value: String = "UsernameInputField",
+    onNewValue: (String) -> Unit = {},
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
@@ -50,10 +52,11 @@ fun UsernameInputField(
     )
 }
 
+@Preview
 @Composable
 fun EmailInputField(
-    value: String,
-    onNewValue: (String) -> Unit,
+    value: String = "EmailInputField",
+    onNewValue: (String) -> Unit = {},
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
@@ -76,12 +79,13 @@ fun EmailInputField(
     )
 }
 
+@Preview
 @Composable
 fun PasswordInputField(
-    value: String,
-    onNewValue: (String) -> Unit,
+    value: String = "PasswordInputField",
+    onNewValue: (String) -> Unit = {},
     modifier: Modifier = Modifier,
-    enabled: Boolean,
+    enabled: Boolean = true,
 ) {
     val passwordVisibility = rememberSaveable { mutableStateOf(false) }
     val visualTransformation = if (passwordVisibility.value) {
