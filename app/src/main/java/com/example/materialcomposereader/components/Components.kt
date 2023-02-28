@@ -7,10 +7,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -24,9 +26,9 @@ import com.example.materialcomposereader.R
 
 @Composable
 fun UsernameInputField(
-    modifier: Modifier = Modifier,
-    value: String,
+    value: String = "",
     onNewValue: (String) -> Unit,
+    modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
     OutlinedTextField(
@@ -34,25 +36,25 @@ fun UsernameInputField(
         onValueChange = {
             onNewValue(it)
         },
+        modifier = modifier,
+        enabled = enabled,
+        textStyle = TextStyle(fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground),
         label = {
             Text(text = stringResource(id = R.string.login_username))
         },
-        singleLine = true,
-        textStyle = TextStyle(fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground),
-        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 10.dp),
-        enabled = enabled,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text,
             imeAction = ImeAction.Next,
         ),
+        singleLine = true,
     )
 }
 
 @Composable
 fun EmailInputField(
-    modifier: Modifier = Modifier,
     value: String,
     onNewValue: (String) -> Unit,
+    modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
     OutlinedTextField(
@@ -60,66 +62,73 @@ fun EmailInputField(
         onValueChange = {
             onNewValue(it)
         },
+        modifier = modifier,
+        enabled = enabled,
+        textStyle = TextStyle(fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground),
         label = {
             Text(text = stringResource(id = R.string.login_email))
         },
-        singleLine = true,
-        textStyle = TextStyle(fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground),
-        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 10.dp),
-        enabled = enabled,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email,
             imeAction = ImeAction.Next,
         ),
+        singleLine = true,
     )
 }
 
 @Composable
 fun PasswordInputField(
-    modifier: Modifier,
     value: String,
     onNewValue: (String) -> Unit,
+    modifier: Modifier = Modifier,
     enabled: Boolean,
-    passwordVisibility: MutableState<Boolean>,
 ) {
+    val passwordVisibility = rememberSaveable { mutableStateOf(false) }
     val visualTransformation = if (passwordVisibility.value) {
         VisualTransformation.None
     } else {
         PasswordVisualTransformation()
     }
+
     OutlinedTextField(
         value = value,
         onValueChange = {
             onNewValue(it)
         },
+        modifier = modifier,
+        enabled = enabled,
+        textStyle = TextStyle(fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground),
         label = {
             Text(text = stringResource(id = R.string.login_password))
         },
-        singleLine = true,
-        textStyle = TextStyle(fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground),
-        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 10.dp),
-        enabled = enabled,
+        trailingIcon = {
+            val image = if (passwordVisibility.value) {
+                Icons.Filled.Visibility
+            } else {
+                Icons.Filled.VisibilityOff
+            }
+
+            val description =
+                if (passwordVisibility.value) {
+                    stringResource(R.string.login_passord_hide)
+                } else {
+                    stringResource(
+                        R.string.login_password_show,
+                    )
+                }
+
+            IconButton(onClick = { passwordVisibility.value = !passwordVisibility.value }) {
+                Icon(imageVector = image, description)
+            }
+        },
+        visualTransformation = visualTransformation,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done,
         ),
-        visualTransformation = visualTransformation,
-        trailingIcon = {
-            PasswordVisibility(passwordVisibility = passwordVisibility)
-        },
         keyboardActions = KeyboardActions.Default,
+        singleLine = true,
     )
-}
-
-@Composable
-fun PasswordVisibility(passwordVisibility: MutableState<Boolean>) {
-    val isVisible = passwordVisibility.value
-
-    IconButton(onClick = {
-        passwordVisibility.value = !isVisible
-    }) {
-        Icons.Default.Close
-    }
 }
 
 @Composable
