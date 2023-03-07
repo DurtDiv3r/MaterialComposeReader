@@ -9,7 +9,7 @@ sealed class SnackbarMessage {
     class StringResSnackbar(@StringRes val message: Int) : SnackbarMessage()
 
     companion object {
-        fun SnackbarMessage.toMessage(resources: Resources): String {
+        fun SnackbarMessage.resolve(resources: Resources): String {
             return when (this) {
                 is StringSnackbar -> this.message
                 is StringResSnackbar -> resources.getString(this.message)
