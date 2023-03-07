@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">MaterialComposeReader</string>
+
+    <string name="login_label">Login</string>
+    <string name="sign_up_label">Sign Up</string>
+    <string name="new_user_label">New user? </string>
+
+    <string name="login_info">Please enter valid email and password that is at least 6 characters</string>
+    <string name="login_create_account">Create Account</string>
+    <string name="login_username">Username</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_password_hide">Hide password</string>
+    <string name="login_password_show">Show password</string>
+
+    <string name="appbar_user_logout">User successfully logged out.</string>
+
+    <string name="error_username">Username cannot be blank.</string>
+    <string name="error_email">Please enter a valid email address.</string>
+    <string name="error_password">Password cannot be blank. Please enter valid password.</string>
+    <string name="error_general">Something wrong happened. Please try again.</string>
 </resources>
