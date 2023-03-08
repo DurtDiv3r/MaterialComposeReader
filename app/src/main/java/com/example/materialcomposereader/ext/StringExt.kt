@@ -2,6 +2,6 @@ package com.example.materialcomposereader.ext
 
 import android.util.Patterns
 
-fun String.isValid(): Boolean {
+fun String.isValidEmail(): Boolean {
     return this.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
