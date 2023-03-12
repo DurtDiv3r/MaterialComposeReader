@@ -1,21 +1,35 @@
 package com.example.materialcomposereader.navigation
 
-import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.example.materialcomposereader.screens.SplashScreen
+import com.example.materialcomposereader.AppState
+import com.example.materialcomposereader.screens.home.HomeScreen
 import com.example.materialcomposereader.screens.login.LoginScreen
+import com.example.materialcomposereader.screens.splash.SplashScreen
+import com.example.materialcomposereader.screens.stats.StatsScreen
 
-@Composable
-fun AppNavigation() {
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = AppScreen.SplashScreen.name) {
-        composable(AppScreen.SplashScreen.name) {
-            SplashScreen(navController = navController)
-        }
-        composable(AppScreen.LoginScreen.name) {
-            LoginScreen(navController = navController)
-        }
+fun NavGraphBuilder.appNavigation(appState: AppState) {
+    composable(AppScreen.SplashScreen.name) {
+        SplashScreen(openAndPop = { route, pop ->
+            appState.navigateAndPopUp(route, pop)
+        })
+    }
+    composable(AppScreen.LoginScreen.name) {
+        LoginScreen(openAndPop = { route, pop ->
+            appState.navigateAndPopUp(route, pop)
+        })
+    }
+    composable(AppScreen.HomeScreen.name) {
+        HomeScreen(openAndPop = { route, pop ->
+            when (route) {
+                AppScreen.StatsScreen.name -> appState.navigate(route)
+                else -> appState.navigateAndPopUp(route, pop)
+            }
+        })
+    }
+    composable(AppScreen.StatsScreen.name) {
+        StatsScreen(openAndPop = { route, pop ->
+            appState.navigate(route)
+        })
     }
 }
